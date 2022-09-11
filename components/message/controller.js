@@ -16,12 +16,36 @@ function addMessage(user,message){
         resolve(fullMessage);
     });
 }
-function getMessages(){
+function getMessages(filterUser){
     return new Promise((resolve,reject)=>{
-        resolve(store.list());
+        resolve(store.list(filterUser));
     });
+}
+function updateMessage(id,message){
+    return new Promise(async(resolve,reject) =>{
+        if (!id || !message) {
+            return reject('Invalid data');
+        }
+        const result = await store.updateText(id,message);
+        return resolve(result);
+    });
+}
+function deleteMessage(id) {
+    return new Promise(async (resolve,reject)=>{
+        if(!id){
+            reject('Id invalido');
+        }
+        try {
+            await store.remove(id);
+            resolve();
+        } catch (e) {
+            reject(e);
+        }
+    })
 }
 module.exports = {
     addMessage,
-    getMessages
+    getMessages,
+    updateMessage,
+    deleteMessage
 }

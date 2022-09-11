@@ -1,5 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const db = require("./db");
+require("dotenv").config({ path: ".env" });
+db(process.env.DB_CONNECT);
 // const router = require('./components/message/network');
 const router = require('./network/routers');
 var app = express();
