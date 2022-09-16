@@ -8,6 +8,7 @@ function addMessage(user,message){
         }
         console.log(message);
         const fullMessage = {
+            chat:chat,
             user:user,
             message:message,
             date: new Date()
